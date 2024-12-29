@@ -255,6 +255,9 @@ namespace DVConverter
                                        $"ETA: {TimeSpan.FromSeconds(remainSec):hh\\:mm\\:ss}";
                 }
             });
+            
+            //log e.Data here to a console
+            //Console.WriteLine(e.Data);
         }
 
         private void OnProcessExited(object sender, EventArgs e)
@@ -341,7 +344,7 @@ namespace DVConverter
                 case "sdr":
                     return "hwupload,libplacebo=peak_detect=false:colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv:format=yuv420p10le,hwdownload,format=yuv420p10le";
                 case "hlg":
-                    return "hwupload,libplacebo=iw:ih:format=yuv420p10le:format=rgb48le";
+                    return "hwupload,libplacebo=peak_detect=false:colorspace=9:color_primaries=9:color_trc=14:range=tv:format=yuv420p10le,hwdownload,format=yuv420p10le";
                 default:
                     throw new ArgumentException("Invalid encoding type (hdr10, sdr, hlg).");
             }
@@ -355,7 +358,7 @@ namespace DVConverter
                     return
                         "repeat-headers=1:sar=1:hrd=1:aud=1:open-gop=0:hdr10=1:sao=0:rect=0:cutree=0:deblock=-3-3:strong-intra-smoothing=0:chromaloc=2:aq-mode=1:vbv-maxrate=160000:vbv-bufsize=160000:max-luma=1023:max-cll=0,0:master-display=G(8500,39850)B(6550,23000)R(35400,15650)WP(15635,16450)L(10000000,1):preset=slow";
                 case "sdr":
-                    return "deblock=-3-3:vbv-bufsize=62500:vbv-maxrate=50000:fast-pskip=0:dct-decimate=0:level=5.1:ref=5:psy-rd=1.05,0.15:subme=11:me=umh:me_range=48:preset=slow";
+                    return "deblock=-3-3:vbv-bufsize=62500:vbv-maxrate=50000:fast-pskip=0:dct-decimate=0:level=5.1:ref=5:psy-rd=1.05,0.15:subme=7:me=umh:me_range=48:preset=slow";
                 case "hlg":
                     return "open-gop=0:atc-sei=18:pic_struct=0:preset=slow";
                 default:
