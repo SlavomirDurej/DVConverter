@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
         <UseWindowsForms>true</UseWindowsForms>
+        <ApplicationIcon>resources\icon.ico</ApplicationIcon>
     </PropertyGroup>
   <ItemGroup>
     <!-- Mark ffmpeg.exe as "None" so it doesn't get compiled, 
@@ -16,5 +17,9 @@
     <None Include="Tools\FFmpeg\ffprobe.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="resources\icon.ico" />
+    <Resource Include="resources\icon.ico" />
   </ItemGroup>
 </Project>

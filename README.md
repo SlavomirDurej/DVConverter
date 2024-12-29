@@ -39,7 +39,7 @@ A tool to convert Dolby Vision `.mp4` and `.mkv` video files into the selected c
 You can download the latest version of DVConverter from the [Releases Page](https://github.com/SlavomirDurej/DVConverter/releases).
 
 ### Instructions:
-1. Download the latest `.zip` file from the [Releases Page](https://github.com/SlavomirDurej/DVConverter/releases).
+1. Download the latest `.zip` file from the [Releases Page](https://github.com/SlavomirDurej/DVConverter/releases) for your platform.
 2. Extract the contents of the `.zip` file to any folder on your computer.
 3. Run the `DVConverter.exe` file to start the application.
 
