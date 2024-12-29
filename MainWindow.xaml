@@ -1,12 +1,151 @@
 ﻿<Window x:Class="DVConverter.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DVConverter"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Dolby Vision Converter"
+        Height="480" Width="800">
 
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <!-- (0) Title -->
+            <RowDefinition Height="Auto"/>
+            <!-- (1) Blurb -->
+            <RowDefinition Height="Auto"/>
+            <!-- (2) Input file row -->
+            <RowDefinition Height="Auto"/>
+            <!-- (3) Output folder row -->
+            <RowDefinition Height="Auto"/>
+            <!-- (4) Output Color Space row -->
+            <RowDefinition Height="Auto"/>
+            <!-- (5) Codec Format row -->
+            <RowDefinition Height="Auto"/>
+            <!-- (6) Average Bitrate row -->
+            <RowDefinition Height="Auto"/>
+            <!-- (7) Drag & Drop area -->
+            <RowDefinition Height="Auto"/>
+            <!-- (8) Progress label + bar -->
+            <RowDefinition Height="Auto"/>
+            <!-- (9) Start/Cancel Button row -->
+            <RowDefinition Height="Auto"/>
+            <!-- (10) Filler -->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/> <!-- Label column -->
+            <ColumnDefinition Width="*"/>    <!-- Main content column -->
+            <ColumnDefinition Width="Auto"/> <!-- Right-side button column -->
+        </Grid.ColumnDefinitions>
+
+        <!-- (0) Big Title -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="3"
+                   Text="Dolby Vision Converter"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   Margin="0,0,0,8"/>
+
+        <!-- (1) Blurb about the tool -->
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="3"
+                   TextWrapping="Wrap"
+                   Text="This tool converts Dolby Vision video files into the selected color space and codec."
+                   Margin="0,0,0,10"/>
+
+        <!-- (2) Input File -->
+        <Label Grid.Row="2" Grid.Column="0" Content="Input File:" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtInput" Grid.Row="2" Grid.Column="1" Margin="5"/>
+        <Button x:Name="btnBrowseInput" Grid.Row="2" Grid.Column="2"
+                Content="Browse..."
+                Margin="5"
+                Padding="5"
+                Click="btnBrowseInput_Click"/>
+
+        <!-- (3) Output Folder -->
+        <Label Grid.Row="3" Grid.Column="0" Content="Output Folder:" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtOutputDir" Grid.Row="3" Grid.Column="1" Margin="5"/>
+        <Button x:Name="btnBrowseOutput" Grid.Row="3" Grid.Column="2"
+                Content="Browse..."
+                Margin="5"
+                Padding="5"
+                Click="btnBrowseOutput_Click"/>
+
+        <!-- (4) Output Color Space -->
+        <Label Grid.Row="4" Grid.Column="0"
+               Content="Output Color Space:"
+               VerticalAlignment="Center"
+               Margin="0,0,5,0"/>
+        <StackPanel Grid.Row="4" Grid.Column="1"
+                    Orientation="Horizontal"
+                    Height="22">
+            <RadioButton x:Name="rbHDR10" Content="HDR10" Margin="0,5,10,0" IsChecked="True"/>
+            <RadioButton x:Name="rbSDR"   Content="SDR"   Margin="0,5,10,0"/>
+            <RadioButton x:Name="rbHLG"   Content="HLG"   Margin="0,5,10,0"/>
+        </StackPanel>
+
+        <!-- (5) Codec Format -->
+        <Label Grid.Row="5" Grid.Column="0"
+               Content="Codec Format:"
+               VerticalAlignment="Center"
+               Margin="0,0,5,0"/>
+        <StackPanel Grid.Row="5" Grid.Column="1"
+                    Orientation="Horizontal"
+                    Height="22">
+            <RadioButton x:Name="rbH265" Content="H.265" Margin="0,5,10,0" IsChecked="True"/>
+            <RadioButton x:Name="rbH264" Content="H.264" Margin="0,5,10,0" />
+        </StackPanel>
+
+        <!-- (6) Average Bitrate -->
+        <Label Grid.Row="6" Grid.Column="0"
+               Content="Average Bitrate (kbps):"
+               VerticalAlignment="Center"/>
+        <TextBox x:Name="txtBitrate"
+                 Grid.Row="6" Grid.Column="1"
+                 HorizontalAlignment="Left"
+                 Margin="5"
+                 Width="80"
+                 Text="15000"/>
+
+        <!-- (7) Drag & Drop area in the middle column only -->
+        <Border x:Name="bdDropZone"
+                Grid.Row="7" Grid.Column="1"
+                Background="#BDBDBD"
+                CornerRadius="5"
+                Margin="0,10,0,10"
+                Padding="10"
+                Height="150"
+                AllowDrop="True"
+                Drop="bdDropZone_Drop"
+                DragOver="bdDropZone_DragOver"
+                DragEnter="bdDropZone_DragEnter"
+                DragLeave="bdDropZone_DragLeave">
+            <TextBlock x:Name="TxtDropZone"
+                       Text="Drag'n'drop your .mp4 or .mkv file here"
+                       Foreground="#545454"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"/>
+        </Border>
+
+        <!-- (8) Progress label + bar -->
+        <Label Grid.Row="8" Grid.Column="0"
+               Content="Progress:"
+               Margin="0,0,5,0"
+               VerticalAlignment="Center"/>
+        <ProgressBar x:Name="progressBar"
+                     Grid.Row="8"
+                     Grid.Column="1"
+                     Margin="5,0,0,0"
+                     Height="20"
+                     Minimum="0"
+                     Maximum="100"/>
+
+        <!-- (9) Single button (Start/Cancel) centered -->
+        <Button x:Name="BtnStart"
+                Grid.Row="9"
+                Grid.ColumnSpan="3"
+                Content="Start Conversion"
+                Width="140"
+                Height="35"
+                HorizontalAlignment="Center"
+                Margin="0,10,0,0"
+                Click="onBtnClick"/>
     </Grid>
 </Window>
