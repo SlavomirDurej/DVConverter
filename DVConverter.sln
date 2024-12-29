@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVConverter", "DVConverter.csproj", "{AB5C94D0-3CC5-443C-AFD9-E3A37F09B0DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB5C94D0-3CC5-443C-AFD9-E3A37F09B0DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB5C94D0-3CC5-443C-AFD9-E3A37F09B0DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB5C94D0-3CC5-443C-AFD9-E3A37F09B0DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB5C94D0-3CC5-443C-AFD9-E3A37F09B0DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
