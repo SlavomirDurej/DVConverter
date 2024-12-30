@@ -2,7 +2,7 @@
 
 A tool to convert Dolby Vision `.mp4` and `.mkv` video files into the selected color space and codec.
 
-![image](https://github.com/user-attachments/assets/39df9f00-f9c1-4491-b909-e2003bbb7223)
+![image](https://github.com/user-attachments/assets/7035e0be-699c-4f6c-a2c6-cb68f0dca764)
 
 ## Features
 
