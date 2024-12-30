@@ -121,6 +121,7 @@ namespace DVConverter
             string colorSpace = "hdr10"; // default
             if (rbSDR.IsChecked == true) colorSpace = "sdr";
             if (rbHLG.IsChecked == true) colorSpace = "hlg";
+            if (rbNone.IsChecked == true) colorSpace = "none";
 
             // 2) Which codec? (h264 / h265)
             // We'll pick the correct ffmpeg encoder name
@@ -225,6 +226,43 @@ namespace DVConverter
                 System.Windows.MessageBox.Show("Error starting ffmpeg:\n" + ex.Message);
             }
         }
+        
+         // ---------- FILTERS & PARAMS ----------
+         private string GetVideoFilter(string encodingType)
+         {
+             switch (encodingType.ToLower())
+             {
+                 case "hdr10":
+                     return "hwupload,libplacebo=peak_detect=false:colorspace=9:color_primaries=9:color_trc=16:range=tv:format=yuv420p10le,hwdownload,format=yuv420p10le";
+                 case "sdr":
+                     return "hwupload,libplacebo=peak_detect=false:colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv:format=yuv420p10le,hwdownload,format=yuv420p10le";
+                 case "hlg":
+                     return "hwupload,libplacebo=peak_detect=false:colorspace=9:color_primaries=9:color_trc=14:range=tv:format=yuv420p10le,hwdownload,format=yuv420p10le";
+                 case "none":
+                     return "hwupload,libplacebo=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv:format=yuv420p,hwdownload,format=yuv420p";
+                 default:
+                     throw new ArgumentException("Invalid encoding type (hdr10, sdr, hlg, hdr10plus).");
+             }
+         }
+
+
+        private string GetX265Params(string encodingType)
+        {
+            switch (encodingType.ToLower())
+            {
+                case "hdr10":
+                    return
+                        "repeat-headers=1:sar=1:hrd=1:aud=1:open-gop=0:hdr10=1:sao=0:rect=0:cutree=0:deblock=-3-3:strong-intra-smoothing=0:chromaloc=2:aq-mode=1:vbv-maxrate=160000:vbv-bufsize=160000:max-luma=1023:max-cll=0,0:master-display=G(8500,39850)B(6550,23000)R(35400,15650)WP(15635,16450)L(10000000,1):preset=slow";
+                case "sdr":
+                    return "deblock=-3-3:vbv-bufsize=62500:vbv-maxrate=50000:fast-pskip=0:dct-decimate=0:level=5.1:ref=5:psy-rd=1.05,0.15:subme=7:me=umh:me_range=48:preset=slow";
+                case "hlg":
+                    return "open-gop=0:atc-sei=18:pic_struct=0:preset=slow";
+                case "none":
+                    return "preset=medium";
+                default:
+                    return "";
+            }
+        }
 
         private void CancelConversion()
         {
@@ -257,7 +295,7 @@ namespace DVConverter
             });
             
             //log e.Data here to a console
-            //Console.WriteLine(e.Data);
+            Console.WriteLine(e.Data);
         }
 
         private void OnProcessExited(object sender, EventArgs e)
@@ -334,36 +372,6 @@ namespace DVConverter
             return duration;
         }
 
-        // ---------- FILTERS & PARAMS ----------
-        private string GetVideoFilter(string encodingType)
-        {
-            switch (encodingType.ToLower())
-            {
-                case "hdr10":
-                    return "hwupload,libplacebo=peak_detect=false:colorspace=9:color_primaries=9:color_trc=16:range=tv:format=yuv420p10le,hwdownload,format=yuv420p10le";
-                case "sdr":
-                    return "hwupload,libplacebo=peak_detect=false:colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv:format=yuv420p10le,hwdownload,format=yuv420p10le";
-                case "hlg":
-                    return "hwupload,libplacebo=peak_detect=false:colorspace=9:color_primaries=9:color_trc=14:range=tv:format=yuv420p10le,hwdownload,format=yuv420p10le";
-                default:
-                    throw new ArgumentException("Invalid encoding type (hdr10, sdr, hlg).");
-            }
-        }
-
-        private string GetX265Params(string encodingType)
-        {
-            switch (encodingType.ToLower())
-            {
-                case "hdr10":
-                    return
-                        "repeat-headers=1:sar=1:hrd=1:aud=1:open-gop=0:hdr10=1:sao=0:rect=0:cutree=0:deblock=-3-3:strong-intra-smoothing=0:chromaloc=2:aq-mode=1:vbv-maxrate=160000:vbv-bufsize=160000:max-luma=1023:max-cll=0,0:master-display=G(8500,39850)B(6550,23000)R(35400,15650)WP(15635,16450)L(10000000,1):preset=slow";
-                case "sdr":
-                    return "deblock=-3-3:vbv-bufsize=62500:vbv-maxrate=50000:fast-pskip=0:dct-decimate=0:level=5.1:ref=5:psy-rd=1.05,0.15:subme=7:me=umh:me_range=48:preset=slow";
-                case "hlg":
-                    return "open-gop=0:atc-sei=18:pic_struct=0:preset=slow";
-                default:
-                    return "";
-            }
-        }
+       
     }
 }

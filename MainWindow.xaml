@@ -78,6 +78,7 @@
             <RadioButton x:Name="rbHDR10" Content="HDR10" Margin="0,5,10,0" IsChecked="True"/>
             <RadioButton x:Name="rbSDR"   Content="SDR"   Margin="0,5,10,0"/>
             <RadioButton x:Name="rbHLG"   Content="HLG"   Margin="0,5,10,0"/>
+            <RadioButton x:Name="rbNone"  Content="Standard"   Margin="0,5,10,0"/>
         </StackPanel>
 
         <!-- (5) Codec Format -->
