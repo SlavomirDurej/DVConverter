@@ -14,6 +14,10 @@ A tool to convert Dolby Vision `.mp4` and `.mkv` video files into the selected c
     - **HDR10**
     - **SDR**
     - **HLG**
+    - **Standard**
+    - 
+**Please note that h.264 support for dynamic range color options is quite limited and may not work on some of the devices such as TVs.
+Please select "Standard" option for the most compatible color output option.**
 
 - **Quality & Size Control via Bitrate**  
   Adjust the average bitrate (e.g., 15,000 kbps) to balance file size and video quality.
