@@ -45,7 +45,7 @@ namespace DVConverter
                 if (files.Length > 0)
                 {
                     string ext = Path.GetExtension(files[0]).ToLower();
-                    e.Effects = (ext == ".mp4" || ext == ".mkv")
+                    e.Effects = (ext == ".mp4" || ext == ".mkv" || ext == ".ts")
                         ? System.Windows.DragDropEffects.Copy
                         : System.Windows.DragDropEffects.None;
                 }
@@ -76,7 +76,7 @@ namespace DVConverter
         {
             var ofd = new Microsoft.Win32.OpenFileDialog
             {
-                Filter = "Video Files|*.mp4;*.mkv|All Files|*.*"
+                Filter = "Video Files|*.mp4;*.mkv;*.ts|All Files|*.*"
             };
             if (ofd.ShowDialog() == true)
             {
@@ -103,7 +103,7 @@ namespace DVConverter
             }
             else
             {
-                TxtDropZone.Text = "Conversion started!";
+                TxtDropZone.Text = "Conversion started.. Please wait";
                 Convert();
             }
         }
@@ -261,6 +261,27 @@ namespace DVConverter
                     return "preset=medium";
                 default:
                     return "";
+            }
+        }
+        
+        //buy me a coffee function BuyCoffee_Click
+        private void BuyCoffee_Click(object sender, RoutedEventArgs e)
+        {
+            string link = "https://paypal.me/SlavomirDurej?country.x=GB&locale.x=en_GB";
+    
+            try
+            {
+                // For .NET Core and .NET 5+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = link,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                // Optional: Handle exceptions (e.g., log the error or notify the user)
+                System.Windows.Forms.MessageBox.Show("Unable to open the link. Please try again later.", "Error", WinForms.MessageBoxButtons.OK, WinForms.MessageBoxIcon.Error);
             }
         }
 
