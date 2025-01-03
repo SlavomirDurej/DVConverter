@@ -156,10 +156,7 @@ namespace DVConverter
             _estimatedTotalDuration = GetVideoDuration(inputPath);
 
             // FFmpeg path
-            string ffmpegPath = Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "Tools", "FFmpeg", "ffmpeg.exe"
-            );
+            string ffmpegPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tools", "ffmpeg.exe");
 
             // Build the color filter & x265 params
             string videoFilter = GetVideoFilter(colorSpace);
@@ -352,7 +349,7 @@ namespace DVConverter
             TimeSpan duration = TimeSpan.Zero;
             string ffprobePath = Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,
-                "Tools", "FFmpeg", "ffprobe.exe"
+                "Tools", "ffprobe.exe"
             );
 
             // format=duration gives container-level duration

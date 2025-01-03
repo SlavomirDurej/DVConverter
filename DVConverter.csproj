@@ -11,10 +11,10 @@
   <ItemGroup>
     <!-- Mark ffmpeg.exe as "None" so it doesn't get compiled, 
          but is copied to the output folder in the same relative path. -->
-    <None Include="Tools\FFmpeg\ffmpeg.exe">
+    <None Update="Tools\ffmpeg.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tools\FFmpeg\ffprobe.exe">
+    <None Update="Tools\ffprobe.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
