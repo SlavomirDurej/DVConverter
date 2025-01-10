@@ -29,6 +29,25 @@ Please select "Standard" option for the most compatible color output option.**
   The output file keeps the original name, appending `_converted` (plus extra details) at the end.
     - If no output folder is selected, it defaults to **the same folder** as your input.
 
+##  System Requirements
+
+>⚠️ **IMPORTANT**: This tool requires a GPU with **Vulkan API support**
+
+### Compatible Graphics Cards:
+
+#### NVIDIA GPUs
+* **GTX 600 Series and Newer** (Kepler architecture and above)
+  * Examples: GTX 680, GTX 970M, GTX 940M
+* **RTX Series** with full Vulkan 1.3 support
+  * Example: RTX 2060
+
+#### AMD GPUs
+* **Radeon HD 7000 Series and Newer** (Graphics Core Next 1.0 architecture and above)
+* **RX 500 Series** recommended for open-source driver support
+  * Examples: RX 570, RX 580
+
+
+
 ## How It Works
 
 - **Transcoding & Color Filters**  
